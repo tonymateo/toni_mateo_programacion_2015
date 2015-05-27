@@ -16,35 +16,44 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Iterator;
 
+import javax.swing.JPasswordField;
 
 public class VistaApp extends JPanel {
 	private JPanel base;
-	private JTextField pass;
+	private JPasswordField passwordField;
+	private Modelo.usuarios usuarioJuegos=new Modelo.usuarios();
 
 	public VistaApp() {
 		setBackground(Color.LIGHT_GRAY);
 		setLayout(null);
 		this.setBounds(0,0,400,400);
 				
+		//Icono
+		Image logo = new ImageIcon(this.getClass().getResource("/logo.jpg")).getImage();
+		JLabel icono = new JLabel("");
+		icono.setBounds(25, 11, 167, 127);
+		icono.setIcon(new ImageIcon(logo));
+		add(icono);
 				
 		//Label de usuario
 		JLabel lblNewLabel = new JLabel("Usuario");
 		lblNewLabel.setBounds(25, 149, 78, 23);
 		add(lblNewLabel);
 		
-		//Icono
-		Image logo= new ImageIcon(this.getClass().getResource("/logo.jpg")).getImage();
-		JLabel icono = new JLabel("");
-		icono.setBounds(25, 11, 167, 127);
-		icono.setIcon(new ImageIcon (logo));
-		add(icono);
+		//Campo de la contraseña
+		passwordField = new JPasswordField();
+		passwordField.setToolTipText("");
+		passwordField.setBounds(25, 253, 103, 20);
+		add(passwordField);
 				
 		//Label de la contraseña
-		JLabel lblContrasea = new JLabel("Contrasena");
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
 		lblContrasea.setBounds(25, 220, 78, 23);
 		add(lblContrasea);
 				
@@ -60,15 +69,25 @@ public class VistaApp extends JPanel {
 		
 		//Label Usuraio
 		JComboBox elecUsuario = new JComboBox();
-		elecUsuario.setBounds(25, 183, 167, 23);
+		elecUsuario.setBounds(28, 173, 100, 20);
+		//Creo un iterator con el resultado de la bd que nos permite recorrer tdos los usuarios
+		Iterator<String> contador=usuarioJuegos.getUsuarios().iterator();
+			while(contador.hasNext()){
+			//añadimos cada valor del iterator al comboBox
+				elecUsuario.addItem(contador.next().toString());
+			}
+		elecUsuario.setBounds(28, 173, 100, 20);
 		add(elecUsuario);
 		
-		//Label Contraseña
-		pass = new JTextField();
-		pass.setBounds(25, 249, 167, 23);
-		pass.setColumns(10);
-		add(pass);
+		//Boton de login
+		JButton btnLogIn = new JButton("Log in");
+		btnLogIn.setBounds(25, 298, 89, 23);
+		add(btnLogIn);
+		
+		//Boton sign in
+		JButton btnSignUp = new JButton("Sign up");
+		btnSignUp.setBounds(25, 332, 89, 23);
+		add(btnSignUp);
 
 	}
-
 }
