@@ -26,6 +26,7 @@ public class vistaEstadisticas extends JPanel {
 	private vistaPrincipal vPrincipal;
 	private JTextField textoGoles;
 	private JTextField textoMinutos;
+	private String id;
 	
 	/**
 	 * Create the panel.
@@ -68,6 +69,7 @@ public class vistaEstadisticas extends JPanel {
 		add(lblNewLabel);
 		
 		String[] dj=datos.consultaNombreJugador();
+		ArrayList<Estadisticas> dE=datosEs.consultaEstadisticas();
 		
 		JComboBox boxJugadores = new JComboBox();
 		boxJugadores.setBounds(180, 94, 154, 20);

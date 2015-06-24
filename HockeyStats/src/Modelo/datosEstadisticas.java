@@ -24,12 +24,12 @@ public class datosEstadisticas {
 			
 		try {
 			statement = conexion.createStatement();
-			resultado = statement.executeQuery("select * from estadisticas;");//realizo la consulta que me devuelve a todos las estadisticas
+			resultado = statement.executeQuery("select j.nombre, e.idpartido, e.minutosjugados, e.golesmarcados FROM estadisticas e INNER JOIN jugadores j ON j.id = e.idjugador;");//realizo la consulta que me devuelve a todos las estadisticas
 			while (resultado.next()) {
 				Estadisticas estadistica;
 				
 				//me creo un objeto estadistica al cual le voy a pasar 3 parametros para que cada columna de la base de datos sea 1 objeto distinto
-				estadistica=new Estadisticas(resultado.getString("idjugador"), resultado.getString("idPartido"), resultado.getString("minutosjugados"), resultado.getString("golesmarcados"));
+				estadistica=new Estadisticas(resultado.getString("nombre"), resultado.getString("idPartido"), resultado.getString("minutosjugados"), resultado.getString("golesmarcados"));
 				arrayListEstadisticas.add(estadistica);
 			}
 		} catch (SQLException e) {
