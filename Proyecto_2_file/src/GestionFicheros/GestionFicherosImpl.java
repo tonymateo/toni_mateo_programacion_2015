@@ -92,7 +92,10 @@ public class GestionFicherosImpl implements GestionFicheros {
 	@Override
 	public void elimina(String arg0) throws GestionFicherosException {
 		File file = new File(carpetaDeTrabajo,arg0);
-		file.delete();
+		if (carpetaDeTrabajo.canWrite() && carpetaDeTrabajo.exists()){
+			file.delete();	
+		}
+		actualiza();
 	}
 
 	@Override
@@ -281,10 +284,16 @@ public class GestionFicherosImpl implements GestionFicheros {
 	}
 
 	@Override
-	public void renombra(String arg0, String arg1)
-			throws GestionFicherosException {
-		// TODO Auto-generated method stub
-
+	public void renombra(String arg0, String arg1) throws GestionFicherosException {
+		File file = new File(carpetaDeTrabajo,arg0);
+		//me creo un nuevo File que sustituirá el nombre del anterior
+		File nuevoNombre = new File(carpetaDeTrabajo,arg1);
+		//compruebo que se puede escribir y que existe
+		if (carpetaDeTrabajo.canWrite() && carpetaDeTrabajo.exists()){
+			//renombro el fichero
+				file.renameTo(nuevoNombre);	
+			}
+		actualiza();
 	}
 
 	@Override
