@@ -8,6 +8,7 @@ import gestionficheros.TipoOrden;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
 public class GestionFicherosImpl implements GestionFicheros {
@@ -63,21 +64,15 @@ public class GestionFicherosImpl implements GestionFicheros {
 	public void creaCarpeta(String arg0) throws GestionFicherosException {
 		File file = new File(carpetaDeTrabajo,arg0);
 		//que se pueda escribir -> lanzará una excepción
-		//que no exista -> lanzará una excepción
-		//crear la carpeta -> lanzará una excepción
-		actualiza();
+		//direccion para hacer pruebas
 	}
 
 	@Override
 	public void creaFichero(String arg0) throws GestionFicherosException {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void elimina(String arg0) throws GestionFicherosException {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -147,6 +142,8 @@ public class GestionFicherosImpl implements GestionFicheros {
 		//Controlar que existe. Si no, se lanzará una excepción
 		//Controlar que haya permisos de lectura. Si no, se lanzará una excepción
 		
+		if (file.exists() && file.canRead()){
+		
 		//Título
 		strBuilder.append("INFORMACIÓN DEL SISTEMA");
 		strBuilder.append("\n\n");
@@ -178,9 +175,8 @@ public class GestionFicherosImpl implements GestionFicheros {
 		
 		//Fecha de última modificación
 		strBuilder.append("La ultima modificación fue: ");
-		strBuilder.append(file.lastModified());
-		//Date date = new Date(fecha * 1000L);
-		//strBuilder.append(date);
+		SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");//Se establece el tipo de fecha
+		strBuilder.append(fecha.format(file.lastModified()));
 		strBuilder.append("\n");
 		
 		//Si es un fichero oculto o no
@@ -196,28 +192,30 @@ public class GestionFicherosImpl implements GestionFicheros {
 		//bytes
 		if(file.isDirectory() == true){
 			
-			//Espacio libre
-			strBuilder.append("Espacio libre: ");
-			long libre = file.getFreeSpace();
-			strBuilder.append(libre);
-			strBuilder.append(" bytes");
-			strBuilder.append("\n");
+		//Espacio libre
+		strBuilder.append("Espacio libre: ");
+		long libre = file.getFreeSpace();
+		strBuilder.append(libre);
+		strBuilder.append(" bytes");
+		strBuilder.append("\n");
 			
-			//espacio disponible
-			strBuilder.append("Espacio disponible: ");
-			long disponible = file.getUsableSpace();
-			strBuilder.append(disponible);
-			strBuilder.append(" bytes");
-			strBuilder.append("\n");
+		//espacio disponible
+		strBuilder.append("Espacio disponible: ");
+		long disponible = file.getUsableSpace();
+		strBuilder.append(disponible);
+		strBuilder.append(" bytes");
+		strBuilder.append("\n");
 			
-			//espacio total
-			strBuilder.append("Espacio total: ");
-			long total = file.getTotalSpace();
-			strBuilder.append(total);
-			strBuilder.append(" bytes");
-			strBuilder.append("\n");
+		//espacio total
+		strBuilder.append("Espacio total: ");
+		long total = file.getTotalSpace();
+		strBuilder.append(total);
+		strBuilder.append(" bytes");
+		strBuilder.append("\n");
+			}else{
+		throw new GestionFicherosException();
+			}
 		}
-		
 		return strBuilder.toString();
 	}
 
