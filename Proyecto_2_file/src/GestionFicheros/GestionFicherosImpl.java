@@ -52,43 +52,54 @@ public class GestionFicherosImpl implements GestionFicheros {
 	@Override
 	public void arriba() {
 
-		System.out.println("holaaa");
+		//System.out.println("holaaa");
 		if (carpetaDeTrabajo.getParentFile() != null) {
 			carpetaDeTrabajo = carpetaDeTrabajo.getParentFile();
 			actualiza();
 		}
 
 	}
-
+//Toni Mateo
+//ejercicio 1b
 	@Override
 	public void creaCarpeta(String arg0) throws GestionFicherosException {
 		File file = new File(carpetaDeTrabajo,arg0);
 		//que se pueda escribir -> lanzará una excepción
-		//direccion para hacer pruebas
-		//C:\Users\2dam\Desktop
-		if (carpetaDeTrabajo.canWrite() && carpetaDeTrabajo.exists()){
+		if (carpetaDeTrabajo.canWrite()==false){
+			throw new GestionFicherosException("Error, no se puede escribir en el fichero");
+		}
+		//que no exista -> lanzará una excepción
+		if (file.exists()==true){
+			throw new GestionFicherosException("El fichero ya existe!!");
+		}
+		//crear carpeta, si no, lanzará excepción
+		try{
 			file.mkdir();
-		}
-		else{
-			throw new GestionFicherosException();
-		}
+			}catch (SecurityException e){
+				throw new GestionFicherosException("Error al crear el directorio");
+			}
 		actualiza();
-	}
-
+		}
+		
+//ejercicio 1b
 	@Override
 	public void creaFichero(String arg0) throws GestionFicherosException {
 		File file = new File(carpetaDeTrabajo,arg0);
-		if (carpetaDeTrabajo.canWrite() && carpetaDeTrabajo.exists()){
+		
+		if (carpetaDeTrabajo.canWrite()==false){
+			throw new GestionFicherosException("Error, no se puede escribir en el fichero");
+		}
+		
+		if (carpetaDeTrabajo.exists()){
 				try {
 					file.createNewFile();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}	
+					throw new GestionFicherosException("error al crear el fichero");
+				}				
 			}
 		actualiza();
 	}
-
+//ejercicio 1b
 	@Override
 	public void elimina(String arg0) throws GestionFicherosException {
 		File file = new File(carpetaDeTrabajo,arg0);
@@ -97,7 +108,7 @@ public class GestionFicherosImpl implements GestionFicheros {
 		}
 		actualiza();
 	}
-
+	
 	@Override
 	public void entraA(String arg0) throws GestionFicherosException {
 		File file = new File(carpetaDeTrabajo, arg0);
@@ -155,7 +166,8 @@ public class GestionFicherosImpl implements GestionFicheros {
 	public FormatoVistas getFormatoContenido() {
 		return formatoVistas;
 	}
-
+//Toni Mateo
+//Ejercicio 1a
 	@Override
 	public String getInformacion(String arg0) throws GestionFicherosException {
 		
@@ -163,9 +175,13 @@ public class GestionFicherosImpl implements GestionFicheros {
 		File file = new File(carpetaDeTrabajo,arg0);
 		
 		//Controlar que existe. Si no, se lanzará una excepción
+		if (file.exists()==false){
+			throw new GestionFicherosException("El archivo no existe");
+		}
 		//Controlar que haya permisos de lectura. Si no, se lanzará una excepción
-		
-		if (file.exists() && file.canRead()){
+		if (file.canRead()==false){
+			throw new GestionFicherosException("No se puede leer el archivo");		
+		}
 		
 		//Título
 		strBuilder.append("INFORMACIÓN DEL SISTEMA");
@@ -178,12 +194,12 @@ public class GestionFicherosImpl implements GestionFicheros {
 		
 		//Tipo: fichero o directorio
 		strBuilder.append("Tipo de fichero: ");
-		if(file.isDirectory() == true){
-			strBuilder.append("Es un directorio");
-		}
-		if(file.isFile() == true){
-			strBuilder.append("Es un fichero");
-		}
+			if(file.isDirectory() == true){
+				strBuilder.append("Es un directorio");
+			}
+			if(file.isFile() == true){
+				strBuilder.append("Es un fichero");
+			}
 		strBuilder.append("\n");
 		
 		//Ubicación
@@ -191,8 +207,7 @@ public class GestionFicherosImpl implements GestionFicheros {
 		try {
 			strBuilder.append(file.getCanonicalPath());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new GestionFicherosException("No se puede obtener el nombre del fichero");
 		}
 		strBuilder.append("\n");
 		
@@ -215,32 +230,29 @@ public class GestionFicherosImpl implements GestionFicheros {
 		//bytes
 		if(file.isDirectory() == true){
 			
-		//Espacio libre
-		strBuilder.append("Espacio libre: ");
-		long libre = file.getFreeSpace();
-		strBuilder.append(libre);
-		strBuilder.append(" bytes");
-		strBuilder.append("\n");
+			//Espacio libre
+			strBuilder.append("Espacio libre: ");
+			long libre = file.getFreeSpace();
+			strBuilder.append(libre);
+			strBuilder.append(" bytes");
+			strBuilder.append("\n");
 			
-		//espacio disponible
-		strBuilder.append("Espacio disponible: ");
-		long disponible = file.getUsableSpace();
-		strBuilder.append(disponible);
-		strBuilder.append(" bytes");
-		strBuilder.append("\n");
+			//espacio disponible
+			strBuilder.append("Espacio disponible: ");
+			long disponible = file.getUsableSpace();
+			strBuilder.append(disponible);
+			strBuilder.append(" bytes");
+			strBuilder.append("\n");
 			
-		//espacio total
-		strBuilder.append("Espacio total: ");
-		long total = file.getTotalSpace();
-		strBuilder.append(total);
-		strBuilder.append(" bytes");
-		strBuilder.append("\n");
-			}else{
-		throw new GestionFicherosException();
-			}
+			//espacio total
+			strBuilder.append("Espacio total: ");
+			long total = file.getTotalSpace();
+			strBuilder.append(total);
+			strBuilder.append(" bytes");
+			strBuilder.append("\n");
+				}
+			return strBuilder.toString();
 		}
-		return strBuilder.toString();
-	}
 
 	@Override
 	public boolean getMostrarOcultos() {
@@ -282,17 +294,27 @@ public class GestionFicherosImpl implements GestionFicheros {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+//ejercicio 1b
 	@Override
 	public void renombra(String arg0, String arg1) throws GestionFicherosException {
 		File file = new File(carpetaDeTrabajo,arg0);
 		//me creo un nuevo File que sustituirá el nombre del anterior
 		File nuevoNombre = new File(carpetaDeTrabajo,arg1);
 		//compruebo que se puede escribir y que existe
-		if (carpetaDeTrabajo.canWrite() && carpetaDeTrabajo.exists()){
-			//renombro el fichero
+		if (carpetaDeTrabajo.canWrite()){
+			if (file.exists()==false){
+					throw new GestionFicherosException("Error, no se encuentra el archivo especificado");
+				}
+			if (nuevoNombre.exists()){
+					throw new GestionFicherosException("El nombre que has puesto ya existe");
+				}
+			try{
 				file.renameTo(nuevoNombre);	
+			}catch(Exception e){
+				throw new GestionFicherosException("No se puede renombrar");
 			}
+		}
 		actualiza();
 	}
 
