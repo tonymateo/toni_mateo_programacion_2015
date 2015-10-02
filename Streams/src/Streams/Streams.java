@@ -5,15 +5,17 @@ import java.io.IOException;
 
 
 public class Streams {
-	//private File fichero1=null;
-	//private File fichero2=null;
 	
-	static File fichero1 = new File("entrada.txt"); 
-	static File fichero2 = new File("entrada1.txt");
+	public static File fichero1 = new File("entrada.txt"); 
+	public static File fichero2 = new File("entrada1.txt");
 	
 	
 	public static void main(String[] args) throws IOException {
 			Metodos metodo = new Metodos();
-			metodo.compararContenido(fichero1, fichero2);
+			if(metodo.compararContenido(fichero1, fichero2)==true){
+				System.out.println("son iguales");
+			}else{
+				System.out.println("no son iguales");
+			}
 		}
 }
