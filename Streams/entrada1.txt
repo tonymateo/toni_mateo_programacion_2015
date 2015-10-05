@@ -1,2 +1,1 @@
-hola
-dol
+Este es el texto del documento
