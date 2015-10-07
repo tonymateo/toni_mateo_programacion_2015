@@ -2,6 +2,7 @@ package Streams;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class Streams {
@@ -17,5 +18,16 @@ public class Streams {
 			}else{
 				System.out.println("no son iguales");
 			}
+		/**Metodos buscador = new Metodos();
+		try {
+			//System.out.println("Escribe una palabra para buscar");
+			//InputStream palabraParaBuscar = System.in;
+			int posicion = buscador.buscarPalabra(fichero1, palabraParaBuscar.toString()"hola", false);
+			System.out.println("He encontrado tu palabra en la línea"+posicion);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}**/
 		}
 }

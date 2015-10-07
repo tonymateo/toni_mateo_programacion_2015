@@ -2,6 +2,7 @@ package Streams;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -39,9 +40,25 @@ public class Metodos {
 		}
 			return true;
 	}
-	public int buscarPalabra (File fichero1, String palabra, boolean primera_aparicion){
-		return 0;
+	public int buscarPalabra (File ficheroParaBuscar, String palabraParaBuscar, boolean primera_aparicion) throws Exception{
 		
+		int contadorLineas=0;
+		
+		FileReader fr = new FileReader(Streams.fichero1);
+		
+		BufferedReader bfr = new BufferedReader(fr);
+		
+		String texto = bfr.readLine();
+		
+		while(texto != palabraParaBuscar){
+			texto = bfr.readLine();
+			contadorLineas++;
+		}
+		if(primera_aparicion == false){
+			return contadorLineas;
+		}else{
+			return -1;
+		}
 	}
 
 }
