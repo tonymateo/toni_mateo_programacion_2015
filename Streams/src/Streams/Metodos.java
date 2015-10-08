@@ -81,7 +81,6 @@ public class Metodos {
 			String texto = bfr.readLine();
 			ArrayList<String> textoParaOrdenar = null;
 			textoParaOrdenar.add(texto);
-			textoParaOrdenar.sort(c);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
