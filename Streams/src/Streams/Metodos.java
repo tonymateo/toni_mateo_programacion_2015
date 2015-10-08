@@ -5,12 +5,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Metodos {
 
+	//Toni Mateo
+	//Primera parte Ejercicio 1c
+	///////
 	public boolean compararContenido(File fichero1, File fichero2) throws IOException{
-		
-		
 		if (fichero1.canRead() && fichero1.canWrite() && fichero1.exists() && fichero2.canRead() && fichero2.canWrite() && fichero2.exists()){
 			
 			FileReader fr = new FileReader(Streams.fichero1);
@@ -40,28 +42,49 @@ public class Metodos {
 		}
 			return true;
 	}
+	
+	//Toni Mateo
+	//Segunda parte Ejercicio 1c
+	///////
 	public int buscarPalabra (File ficheroParaBuscar, String palabraParaBuscar, boolean primera_aparicion) throws IOException{
+		try{
+			if(ficheroParaBuscar.exists() && ficheroParaBuscar.canRead()){
+				int contadorLineas=1;
+				FileReader fr = new FileReader(Streams.fichero1);
 		
-		if(ficheroParaBuscar.exists() && ficheroParaBuscar.canRead()){
-			int contadorLineas=1;
+				BufferedReader bfr = new BufferedReader(fr);
 		
-			FileReader fr = new FileReader(Streams.fichero1);
+				String texto = bfr.readLine();
 		
-			BufferedReader bfr = new BufferedReader(fr);
-		
-			String texto = bfr.readLine();
-		
-			while(texto != null){
-				if(texto.equals(palabraParaBuscar)){
-					return contadorLineas;
-				}else{
-					texto = bfr.readLine();
-					contadorLineas++;	
+				while(texto != null){
+					if(texto.equals(palabraParaBuscar)){
+						return contadorLineas;
+					}else{
+						texto = bfr.readLine();
+						contadorLineas++;	
+					}
 				}
+			}else{
+				throw new IOException("No se ha encontrado el fichero");
 			}
-		}else{
-			throw new IOException("No se ha encontrado el fichero");
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return -1;
+	return -1;
+	}
+	
+	public void ordenarFichero(File Origen, File Destino, int tipo_orden) throws FileNotFoundException{
+		BufferedReader bfr = new BufferedReader(new FileReader(Streams.ficheroOrigen));
+		
+		try {
+			String texto = bfr.readLine();
+			ArrayList<String> textoParaOrdenar = null;
+			textoParaOrdenar.add(texto);
+			textoParaOrdenar.sort(c);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
