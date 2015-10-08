@@ -40,25 +40,28 @@ public class Metodos {
 		}
 			return true;
 	}
-	public int buscarPalabra (File ficheroParaBuscar, String palabraParaBuscar, boolean primera_aparicion) throws Exception{
+	public int buscarPalabra (File ficheroParaBuscar, String palabraParaBuscar, boolean primera_aparicion) throws IOException{
 		
-		int contadorLineas=0;
+		if(ficheroParaBuscar.exists() && ficheroParaBuscar.canRead()){
+			int contadorLineas=1;
 		
-		FileReader fr = new FileReader(Streams.fichero1);
+			FileReader fr = new FileReader(Streams.fichero1);
 		
-		BufferedReader bfr = new BufferedReader(fr);
+			BufferedReader bfr = new BufferedReader(fr);
 		
-		String texto = bfr.readLine();
+			String texto = bfr.readLine();
 		
-		while(texto != palabraParaBuscar){
-			texto = bfr.readLine();
-			contadorLineas++;
-		}
-		if(primera_aparicion == false){
-			return contadorLineas;
+			while(texto != null){
+				if(texto.equals(palabraParaBuscar)){
+					return contadorLineas;
+				}else{
+					texto = bfr.readLine();
+					contadorLineas++;	
+				}
+			}
 		}else{
-			return -1;
+			throw new IOException("No se ha encontrado el fichero");
 		}
+		return -1;
 	}
-
 }
