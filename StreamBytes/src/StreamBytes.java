@@ -35,6 +35,7 @@ public class StreamBytes {
 	}
 	
 	public static void CopiaFicheroBinario (){  
+		
 		try{
 			
 		File ficheroOrigen = new File(usuarioOrigen);//Creamos objeto de tipo fichero con la ruta origen.
