@@ -8,9 +8,6 @@
 		private int paginas=0;
 		private int any=0;
 	
-		public Libro() {
-		}
-	
 		public Libro(String nom, String aut, int an, String edit, int pags) {
 			nombre = nom;
 			autor = aut;
@@ -18,6 +15,7 @@
 			editor=edit;
 			paginas=pags;
 		}
+		
 		//getters
 		public String getNombre() {
 			return nombre;
@@ -51,6 +49,10 @@
 		}
 		public void setPaginas(int pags){
 			paginas = pags;
+		}
+		
+		public void print(){
+			System.out.println("Libro: "+nombre+" /Autor: "+autor+" /Any: "+any+" /Editor: "+editor+" /Paginas: "+paginas);
 		}
 	
 	}

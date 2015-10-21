@@ -4,8 +4,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class Almacen {
+	
+	public String nuevotitulo="";
+	public String nuevoAutor="";
 	
 	public Almacen(){
 		
@@ -42,7 +46,6 @@ public class Almacen {
         return p;
 	}
 
-	
 	public void intentarCerrar(Closeable aCerrar) {
 		try {
 			if (aCerrar != null) {
@@ -53,4 +56,19 @@ public class Almacen {
 		}
 	}
 	
+	public void cambiarValores(Libro libroParaCambiar){
+		//metodo el cual recibe el libro que va a ser modificado y despues pidiendo al usuario el nuevo nombre y el autor, los modifica
+		System.out.println("El siguiente libro va a ser modificado: ");
+		libroParaCambiar.print();
+		
+		System.out.println("Por favor introduce el nuevo Nombre: ");
+		Scanner sc = new Scanner(System.in);
+		String nombre=sc.nextLine();
+		libroParaCambiar.setNombre(nombre);
+		
+		System.out.println("Por favor introduce el nuevo Autor: ");
+		Scanner sc2 = new Scanner(System.in);
+		String autor=sc.nextLine();
+		libroParaCambiar.setAutor(autor);
+	}
 }
