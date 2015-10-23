@@ -12,7 +12,6 @@ public class Almacen {
 	public String nuevoAutor="";
 	
 	public Almacen(){
-		
 	}
 
 	public void guardar(Libro libro, String file){
@@ -27,15 +26,14 @@ public class Almacen {
 		}finally{
 			intentarCerrar(out);
 		}
-		
 	}
 	
 	public Libro recuperar(String file) {
-		Libro p = null;
+		Libro l = null;
         ObjectInputStream in=null;
         try {
             in = new ObjectInputStream(new FileInputStream(file));
-            p = (Libro) in.readObject();            
+            l = (Libro) in.readObject();            
         } catch (ClassNotFoundException ex) {
             System.err.println("Error de fichero");
         } catch (IOException ex) {
@@ -43,7 +41,7 @@ public class Almacen {
         }finally{
             intentarCerrar(in);
         }
-        return p;
+        return l;
 	}
 
 	public void intentarCerrar(Closeable aCerrar) {
