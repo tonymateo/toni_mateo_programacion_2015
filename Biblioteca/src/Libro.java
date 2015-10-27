@@ -52,7 +52,7 @@
 		}
 		
 		public void print(){
-			System.out.println("Libro: "+nombre+" /Autor: "+autor+" /Any: "+any+" /Editor: "+editor+" /Paginas: "+paginas);
+			System.out.println("Titulo: "+nombre+" /Autor: "+autor+" /Any: "+any+" /Editor: "+editor+" /Paginas: "+paginas);
 		}
 	
 	}

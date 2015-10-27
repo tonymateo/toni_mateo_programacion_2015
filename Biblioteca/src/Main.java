@@ -18,7 +18,6 @@ public class Main {
 		
 		//puedo guardar los libros que quiera en el archivo file que quiera gracias al método "guardar" 
 		//definido en la clase almacen
-		almacen.cambiarValores(l3);
 		almacen.guardar(l3, l3.getNombre()+".dat");
 		almacen.guardar(l2, "almacen.dat");
 		
@@ -27,21 +26,21 @@ public class Main {
 		l5=almacen.recuperar("almacen.dat");
 		
 		l4.print();
+		
+		//Guardar lista de Libros
+		//Me creo un arraylist de objetos Libro
+		ArrayList<Libro> listaLibros=new ArrayList<Libro>();
+		listaLibros.add(l1);
+		listaLibros.add(l2);
+		listaLibros.add(l3);
+		almacen.guardarListaLibros(listaLibros);
+		
+		almacen.cambiarValores(l3);
+		l3.print();
+		
 		/**System.out.println("Te voy a imprimir el libro de otro fichero \n");
 		l5.print();
-		
-		//me creo un arraylist de objetos Libro al cual le voy a añadir mis libros creados que luego podre recorrer para 
-		//imprimirlos por pantalla usando el iteratr
-		/**ArrayList<Libro> biblioteca=new ArrayList<Libro>();
-
-		biblioteca.add(l1);
-		biblioteca.add(l2);
-		biblioteca.add(l3);
-		
-		Iterator it = biblioteca.iterator();
-		while(it.hasNext()){
-			Libro todosLosLibros = (Libro) it.next();
-			todosLosLibros.print();
+	
 		}**/
 		
 	}

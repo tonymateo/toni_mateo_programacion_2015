@@ -1,15 +1,18 @@
 import java.io.Closeable;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.Iterator;
 public class Almacen {
 	
-	public String nuevotitulo="";
-	public String nuevoAutor="";
+	private String nuevotitulo="";
+	private String nuevoAutor="";
+	private ObjectOutputStream salidaLibros=null;
 	
 	public Almacen(){
 	}
@@ -68,5 +71,38 @@ public class Almacen {
 		Scanner sc2 = new Scanner(System.in);
 		String autor=sc.nextLine();
 		libroParaCambiar.setAutor(autor);
+		sc.close();
+		sc2.close();
+	}
+	
+	public void guardarListaLibros(ArrayList<Libro> librosParaListar){
+		//Me creo un String para los libros que me pasen en el método
+		String nombreArchivos = "listaLibros";
+		File listaLibros = new File(nombreArchivos);
+		
+		//abro un flujo de datos para guardar los libros
+		try {
+			salidaLibros =new ObjectOutputStream(new FileOutputStream(listaLibros));
+		} catch (IOException e) {
+			System.err.println("Error al abrir el archivo");
+		}
+		try {//guardo los libros uno a uno en mi array mediante el iterator
+		Iterator it= librosParaListar.iterator();
+		System.out.println("Se han guardado los siguientes libros: ");
+		while(it.hasNext()){
+			Libro libro=(Libro) it.next();
+			salidaLibros.writeObject(libro);
+			libro.print();
+			System.out.println("");
+		}
+		} catch (IOException e) {
+			System.err.println("Error al escribir los libros");
+		}finally{
+			//intento cerrar el flujo de datos
+			try {
+				salidaLibros.close();
+			} catch (IOException e) {
+				System.err.println("No se ha podido cerrar el archivo");}
+		}
 	}
 }
