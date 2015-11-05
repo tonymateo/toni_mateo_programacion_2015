@@ -70,7 +70,7 @@ public class Parser {
 			
 			String datoAutor=getValor(libroEle,"autor");
 			
-			int datoAny=Integer.parseInt(getIntAny(libroEle,"titulo"));
+			int datoAny=Integer.parseInt(getValor(libroEle,"any"));
 			
 			String datoEditor=getValor(libroEle,"editor");
 			
@@ -86,18 +86,10 @@ public class Parser {
 			String textVal = null;
 			NodeList nodeL = ele.getElementsByTagName(tagName);
 			if(nodeL != null && nodeL.getLength() > 0) {
-				Element e1 = (Element) nodeL.item(0);
+				Element e1 = (Element)nodeL.item(0);
 				textVal = e1.getFirstChild().getNodeValue();
 			}
 			return textVal;
-		}
-		
-		public String getIntAny(Element ele, String tagName){
-			//a partil de un elemento nodo y su nombre, extraigo el contenido
-			NodeList nodeL = ele.getElementsByTagName(tagName);
-			NamedNodeMap lae = nodeL.item(0).getAttributes();
-			String publicacion = lae.item(0).getTextContent();
-			return publicacion;//devuelvo valor del nodo
 		}
 		
 		public void print(){

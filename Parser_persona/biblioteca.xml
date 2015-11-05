@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <biblioteca>
 	<libro>
-		<titulo anyo="2008">Introduction to Linux</titulo>
-		<autor>
-		    <nombre>Machtelt</nombre> 
-		    <nombre>Garrels</nombre>		 
-		</autor>
-		<editor>O'Reilly</editor>
-		<paginas>256</paginas>
+		<titulo>El Hobbit</titulo>
+		<autor>J.R.R. Tolkien</autor>
+		<editor>Minotauro</editor>
+		<paginas>288</paginas>
+		<any>2002</any>
 	</libro>
 	<libro>
-		<titulo anyo="1991">El lenguaje de programación C</titulo>
-		<autor>
-		    <nombre>Kernighan</nombre> 
-		    <nombre>Ritchie</nombre>
-		</autor>
-		<editor>Prentice Hall</editor>
-		<paginas>294</paginas>
+		<titulo>El Juego de Ender</titulo>
+		<autor>Orson Scott Card</autor>
+		<editor>S.A. Ediciones B</editor>
+		<paginas>384</paginas>
+		<any>2008</any>
 	</libro>
 </biblioteca>
