@@ -51,6 +51,8 @@ public class GestionPersistencia {
 					if (p2.getNombre().startsWith(inicio)){
 						lista.add(q.descend("nombre").constraints());
 						p2.print();
+					}else{
+						System.out.println("No hay ningun registro con esos datos");
 					}
 				}
 		}finally{
@@ -71,6 +73,8 @@ public class GestionPersistencia {
 					if(p2.getDni().compareTo(dni) == 0){
 						p2.print();
 						return p2;
+					}else{
+						System.out.println("No hay ningun registro con esos datos");
 					}
 				}
 		}finally{
@@ -93,6 +97,8 @@ public class GestionPersistencia {
 					if(p2.getEdad()>=menor && p2.getEdad()<=mayor){
 						lista.add(p2);
 						p2.print();
+					}else{
+						System.out.println("No hay ningun registro con esos datos");
 					}
 				}
 		}finally{
@@ -102,8 +108,27 @@ public class GestionPersistencia {
 	}
 
 	public List<Persona> recuperarPersonaAvanzada(){
-		return null;
+		List lista= new ArrayList();
 		
+		try{
+			Query q = bbdd.query();		
+			q.constrain(Persona.class);
+				
+			ObjectSet<Persona> res = q.execute();
+			
+				for(Persona p2: res){
+					if (p2.getNombre().endsWith("o") && p2.getEdad() >= 30 && p2.getDni().toString().startsWith("20")){
+						System.out.println("Entro al if");
+						lista.add(p2);
+						p2.print();
+					}else{
+						System.out.println("No hay ningun registro con esos datos");
+					}
+				}
+		}finally{
+			bbdd.close();
+		}
+		return lista;
 	}
 
 }

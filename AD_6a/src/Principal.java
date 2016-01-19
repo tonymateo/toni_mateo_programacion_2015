@@ -9,17 +9,24 @@ import com.db4o.query.Query;
 			String inicial="";
 			GestionPersistencia persistencia = new GestionPersistencia();
 			
-			//Persona p = new Persona("Toni", 25, "50667847T");
-			//Persona p = new Persona("Alex", 20, "161237812D");
-			//Persona p = new Persona("Alex", 20, "161237812D");
-			//Persona p = new Persona("Alejandro", 20, "987686373S");
-			//Persona p = new Persona("Tonas", 29, "198376590P");
-			//persistencia.insertarPersona(p);
+//			Persona p1 = new Persona("Toni", 25, "506678479T");
+//			Persona p2 = new Persona("Alex", 20, "161237812D");
+//			Persona p3 = new Persona("Alex", 20, "161237812D");
+//			Persona p4 = new Persona("Alejandro", 20, "987686373S");
+//			Persona p5 = new Persona("Tonas", 29, "198376590P");
+//			Persona p6 = new Persona("Finalizado", 35, "208876763k");
+//			persistencia.insertarPersona(p1);
+//			persistencia.insertarPersona(p2);
+//			persistencia.insertarPersona(p3);
+//			persistencia.insertarPersona(p4);
+//			persistencia.insertarPersona(p5);
+//			persistencia.insertarPersona(p6);
 
-			//persistencia.recuperarPersonaPorNombre("Alejandro");
+			//persistencia.recuperarPersonaPorNombre("Finalizado");
 			//persistencia.recuperarPersonaPorInicial("A");
-			persistencia.recuperarPersonaPorDni("161237812D");
-			//persistencia.recuperarPersonaPorEdad(10, 30);
+			//persistencia.recuperarPersonaPorDni("161237812D");
+			//persistencia.recuperarPersonaPorEdad(10, 40);
+			persistencia.recuperarPersonaAvanzada();
 			/*
 			try{
 				bbdd.store(p);
